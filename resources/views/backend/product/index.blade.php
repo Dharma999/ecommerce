@@ -15,7 +15,7 @@
                 {{$product->title}}
             </td>
             <td>
-               <img src="{{asset('uploads/products/thumbnail/'. $product->featured_images[0]->image)}}" alt="Image not found">
+               <img src="{{asset('uploads/products/thumbnail/'. $product->featured_images[0]->image)}}" alt="Image not found" style="width: 100px; height: auto;">
             </td>
             <td>
                <a href="{{route('product.edit', $product)}}">Edit</a>

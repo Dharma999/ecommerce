@@ -25,6 +25,16 @@ class FrontendController extends Controller
     }
 
 
+    public function shopView() {
+        $products = Product::all();
+
+        $data = [
+            'products' => $products,
+        ];
+        return view('frontend.shop', $data);
+    }
+
+
     public function product_details($slug)
 
     {

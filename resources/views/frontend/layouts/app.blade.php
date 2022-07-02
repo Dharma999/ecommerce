@@ -26,12 +26,6 @@
             <li class="nav-item">
                 <a href="#" class="nav-link">Help</a>
             </li>
-            <li class="nav-item">
-                <a href="#" class="nav-link">Support</a>
-            </li>
-            <li class="nav-item">
-                <a href="index.html" class="nav-link">Home</a>
-            </li>
         </ul>
         <ul class="navbar-nav ms-auto">
 
@@ -47,17 +41,33 @@
 
 
         <ul class="navbar-nav ms-auto me-4">
-            <li class="nav-item">
-                <a href="#" class="nav-link"> <i class="fa fa-user"></i></a>
-            </li>
+            <ul class="navbar-nav ms-5">
+                <li class="nav-item dropdown" style="list-style: none; text-align: center;">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Category</a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="#">Clothes</a></li>
+                        <li><a class="dropdown-item" href="#">Electronics</a></li>
+                        <li><a class="dropdown-item" href="#">Gadget</a></li>
+                        <li><a class="dropdown-item" href="#">Foods</a></li>
+                        <li><a class="dropdown-item" href="#">Pots</a></li>
+                        <li><a class="dropdown-item" href="#">Vehicles</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a href="#" class="nav-link"><i class="fas fa-heart"> 0</i></a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{route('cart.index')}}" class="nav-link">
+                        <i class="fas fa-shopping-cart"> {{Cart::count()}} </i>
+                    </a>
+                </li>
+            </ul>
             <li class="nav-item">
                 <a href="#" class="nav-link"> <i class="fab fa-facebook"></i></a>
             </li>
             <li class="nav-item">
-                <a href="#" class="nav-link"><i class="fab fa-twitter"></i></a>
-            </li>
-            <li class="nav-item">
-                <a href="#" class="nav-link"><i class="fab fa-linkedin"></i></a>
             </li>
             <li class="nav-item">
                 <a href="#" class="nav-link"><i class="fab fa-instagram"></i></a>
@@ -84,28 +94,55 @@
 
                         <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                             <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="index.html">Home</a>
+                                <a class="nav-link active" aria-current="page" href="{{route('frontend.index')}}">Home</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="shop.html">Shop Now</a>
+                                <a class="nav-link" href="{{route('frontend.shop')}}">Shop Now</a>
                             </li>
                             <li class="nav-item">
-                                <a href="shop-details.html" class="nav-link">Shop Details</a>
+                                <a href="#" class="nav-link">Blog</a>
                             </li>
                             <li class="nav-item">
                                 <a href="#" class="nav-link">Contact</a>
                             </li>
-                            <li class="nav-item">
-                                <a href="#" class="nav-link">Log In</a>
+                        @guest
+                            @if (Route::has('login'))
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                </li>
+                            @endif
+
+                            @if (Route::has('register'))
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                </li>
+                            @endif
+                        @else
+                            <li class="nav-item dropdown">
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    {{ Auth::user()->name }}
+                                </a>
+
+                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                        {{ __('Logout') }}
+                                    </a>
+
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                        @csrf
+                                    </form>
+                                </div>
                             </li>
-                            <li class="nav-item">
-                                <a href="#" class="nav-link">Register</a>
-                            </li>
+                        @endguest
                         </ul>
                     </div>
                 </div>
             </nav>
         </div>
+
+
 
 
 
